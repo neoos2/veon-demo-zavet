@@ -1,0 +1,37 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Photo from "./Photo.astro";
+import Icon from "./Icon.astro";
+import { contacts, lineup } from "../data/site";
+---
+<Section id="hero" class="hero" rec="UX-R002,SP-R001,SP-R002,SP-R006,MA-R005,GA-R001">
+  <div class="container hero__top">
+    <h1 class="hero__title" data-rec="SE-R002">Медичні меблі й обладнання від виробника в&nbsp;Києві</h1>
+    <div class="hero__aside">
+      <p class="hero__lede" data-rec="SE-R003">Власне виробництво 25+ років. Продаємо по всій Україні та експортуємо в країни ЄС.</p>
+      <div class="hero__actions">
+        <a class="btn btn--primary" href={`tel:${contacts.sales.tel}`} aria-label={`Зателефонувати у відділ продажу ${contacts.sales.label}`}>
+          <Icon name="phone" /><span class="tnum">{contacts.sales.label}</span>
+        </a>
+        <a class="btn btn--secondary" href={contacts.telegram}><Icon name="telegram" />Telegram</a>
+      </div>
+      <a class="text-link hero__more" href="#directions">Обрати напрям каталогу</a>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="floor floor--hero" aria-label="Моделі виробника">
+      {lineup.map((p, i) => (
+        <li class="floor__item" style={`--i:${i}`}>
+          <FutureLink class="product">
+            <span class="product__stage" style={`--ph:${p.h}`}>
+              <Photo k={p.key} alt={p.alt} h={p.h} priority={i === 0} class="product__img" />
+            </span>
+            <span class="product__code">{p.code}</span>
+            <span class="product__type">{p.type}</span>
+          </FutureLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

@@ -1,0 +1,60 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { contacts } from "../data/site";
+const routes = [
+  { id: "routes-tender", tab: "Закладам і тендерам", text: "Для закупівель державних і приватних медзакладів працює окремий тендерний відділ.", dept: "Тендерний відділ", phones: [contacts.tender.phone], email: contacts.tender.email, page: "Сторінка для закладів" },
+  { id: "routes-export", tab: "Експорт", text: "Продаємо медичні меблі й обладнання в країни Європейського Союзу та ближнього зарубіжжя.", dept: "Відділ експорту (ЗЕД)", phones: [contacts.exportDept.phone], email: contacts.exportDept.email, page: "Сторінка для партнерів" },
+  { id: "routes-service", tab: "Сервіс", text: "Гарантійне й сервісне обслуговування медтехніки веде окремий відділ.", dept: "Відділ сервісу", phones: contacts.service, page: "Сторінка сервісу" },
+  { id: "routes-home", tab: "Для дому", text: "Опромінювач чи обладнання для реабілітації вдома підберемо в месенджері.", dept: "Консультація", messengers: true, page: "Товари для дому" },
+];
+---
+<Section id="routes" class="routes" rec="UX-R005">
+  <div class="container">
+    <h2 class="section-title">Окремий відділ під вашу задачу</h2>
+    <div class="routes__grid" data-routes>
+      <div class="routes__tabs" role="tablist" aria-label="Відділи" data-tablist hidden>
+        {routes.map((r, i) => (
+          <button class="routes__tab" type="button" role="tab" id={`tab-${r.id}`} aria-controls={r.id} aria-selected={i === 0 ? "true" : "false"} tabindex={i === 0 ? "0" : "-1"} data-tab={r.id}>{r.tab}</button>
+        ))}
+      </div>
+      <div class="routes__panels">
+        {routes.map((r, i) => (
+          <section class:list={["route-panel", { "is-active": i === 0 }]} id={r.id} aria-labelledby={`h-${r.id}`} data-panel>
+            <h3 class="route-panel__title" id={`h-${r.id}`}>
+              <button class="route-panel__toggle" type="button" aria-expanded={i === 0 ? "true" : "false"} aria-controls={`b-${r.id}`} data-toggle>
+                {r.tab}
+              </button>
+              <span class="route-panel__label">{r.tab}</span>
+            </h3>
+            <div class="route-panel__body" id={`b-${r.id}`}>
+              <p class="route-panel__text">{r.text}</p>
+              <div class="route-panel__contact">
+                <p class="route-panel__dept">{r.dept}</p>
+                {r.phones && (
+                  <p class="route-panel__phones">
+                    {r.phones.map((p, j) => (
+                      <span class="route-panel__phone-item">
+                        {j > 0 && <span class="sep" aria-hidden="true">/</span>}
+                        <a class="route-panel__phone tnum" href={`tel:${p.tel}`}>{p.label}</a>
+                      </span>
+                    ))}
+                  </p>
+                )}
+                {r.email && <a class="route-panel__mail" href={`mailto:${r.email}`}><Icon name="mail" />{r.email}</a>}
+                {r.messengers && (
+                  <p class="route-panel__msgs">
+                    <a class="btn btn--secondary" href={contacts.telegram}><Icon name="telegram" />Telegram</a>
+                    <a class="btn btn--secondary" href={contacts.viber}><Icon name="viber" />Viber</a>
+                  </p>
+                )}
+              </div>
+              <FutureLink class="route-panel__page">{r.page}</FutureLink>
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  </div>
+</Section>

@@ -1,0 +1,8 @@
+---
+import Icon from "./Icon.astro";
+import { contacts } from "../data/site";
+---
+<div class="bottom-bar" data-bottom-bar data-rec="UX-R007">
+  <a class="btn btn--primary" href={`tel:${contacts.sales.tel}`} aria-label={`Зателефонувати у відділ продажу ${contacts.sales.label}`}><Icon name="phone" />Зателефонувати</a>
+  <a class="btn btn--secondary" href={contacts.telegram}><Icon name="telegram" />Telegram</a>
+</div>

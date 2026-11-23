@@ -1,0 +1,19 @@
+---
+// Functional line icons only (1.5px stroke, currentColor). Decorative: aria-hidden.
+interface Props { name: "phone" | "telegram" | "viber" | "mail" | "pin" | "menu" | "close" | "arrow"; size?: number; class?: string; }
+const { name, size = 20, class: cls } = Astro.props;
+const paths: Record<Props["name"], string[]> = {
+  phone: ["M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z"],
+  telegram: ["M21.5 3.5 2.8 10.7c-.9.35-.85 1.64.07 1.92l4.63 1.38 1.77 5.6c.24.76 1.2.98 1.75.4l2.5-2.6 4.6 3.4c.6.44 1.46.11 1.6-.62L22.9 4.7c.16-.83-.65-1.5-1.4-1.2Z", "m7.5 14 11-7.5-8 9"],
+  // Viber mark: rounded bubble with the tail low on the left, a handset and two signal arcs (not the WhatsApp circle)
+  viber: ["M12 2.5c5.6 0 8.5 2.3 8.5 7.8 0 5.6-2.9 7.9-8.5 7.9-.8 0-1.6 0-2.4-.2L6.4 21v-3.6C4.3 16.2 3.5 13.9 3.5 10.3c0-5.5 2.9-7.8 8.5-7.8Z", "M9 7.6c-.5.4-.7 1-.5 1.7.7 2.3 2.5 4.1 4.8 4.8.7.2 1.3 0 1.7-.5l.4-.6-1.6-1.1-.7.6a3.8 3.8 0 0 1-2-2l.6-.7-1.1-1.6Z", "M12.6 6.3a3.6 3.6 0 0 1 3.3 3.3", "M12.6 4.6a5.3 5.3 0 0 1 5 5"],
+  mail: ["M3 5h18v14H3Z", "m3 6 9 7 9-7"],
+  pin: ["M20 10c0 5-5.5 10.2-7.4 11.8a1 1 0 0 1-1.2 0C9.5 20.2 4 15 4 10a8 8 0 0 1 16 0Z", "M12 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"],
+  menu: ["M4 7h16", "M4 12h16", "M4 17h16"],
+  close: ["M18 6 6 18", "M6 6l12 12"],
+  arrow: ["M5 12h14", "m13 6 6 6-6 6"],
+};
+---
+<svg class:list={["icon", cls]} width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+  {paths[name].map((d) => <path d={d} />)}
+</svg>

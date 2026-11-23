@@ -1,0 +1,33 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Photo from "./Photo.astro";
+import Icon from "./Icon.astro";
+import { contacts, models } from "../data/site";
+---
+<Section id="models" class="models" rec="UX-R004,UX-R010,MA-R006">
+  <div class="container models__head">
+    <h2 class="section-title">Моделі, які шукають за кодом</h2>
+    <div class="models__ask" data-rec="UX-R004">
+      <a class="btn btn--primary" href={contacts.telegram}><Icon name="telegram" />Уточнити наявність і ціну</a>
+      <p class="models__or">або за телефоном відділу продажу <a class="tnum" href={`tel:${contacts.sales.tel}`}>{contacts.sales.label}</a></p>
+    </div>
+  </div>
+  <div class="container">
+    <ul class="floor floor--ribbon" aria-label="Моделі Заповіту" tabindex="0" data-ribbon>
+      {models.map((m) => (
+        <li class="floor__item">
+          <FutureLink class:list={["product", { "product--type": !m.key }]}>
+            <span class="product__stage">
+              {m.key && m.h
+                ? <Photo k={m.key} alt={m.alt ?? m.code} h={m.h} class={m.light ? "product__img product__img--light" : "product__img"} />
+                : <h3 class="product__code product__code--standing">{m.code}</h3>}
+            </span>
+            {m.key && <h3 class="product__code">{m.code}</h3>}
+            <span class="product__type">{m.type}</span>
+          </FutureLink>
+        </li>
+      ))}
+    </ul>
+  </div>
+</Section>

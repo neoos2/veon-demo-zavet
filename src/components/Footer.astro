@@ -1,0 +1,26 @@
+---
+import FutureLink from "./FutureLink.astro";
+import { futurePages, socials } from "../data/site";
+import { asset } from "../lib/asset";
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div class="site-footer__brand">
+      <a class="logo" href="#top" aria-label="Заповіт, на початок сторінки">
+        <picture>
+          <source srcset={asset("img/logo-zapovit.webp")} type="image/webp" />
+          <img src={asset("img/logo-zapovit.png")} width="164" height="36" alt="Заповіт — Завет, лідер галузі" loading="lazy" />
+        </picture>
+      </a>
+      <p class="site-footer__legal">Група Компаній ЗАПОВІТ, Київ</p>
+    </div>
+    <nav class="site-footer__nav" aria-label="Розділи сайту">
+      <ul class="site-footer__list">
+        {futurePages.map((p) => <li><FutureLink class="site-footer__link">{p}</FutureLink></li>)}
+      </ul>
+    </nav>
+    <ul class="site-footer__social" aria-label="Соцмережі" data-rec="SM-R012,MA-R010">
+      {socials.map((s) => <li><a class="site-footer__link" href={s.href}>{s.name}</a></li>)}
+    </ul>
+  </div>
+</footer>

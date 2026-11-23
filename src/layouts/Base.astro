@@ -1,0 +1,40 @@
+---
+import "../styles/tokens.css";
+import "../styles/fonts.css";
+import "../styles/global.css";
+import "../styles/site.css";
+import { asset } from "../lib/asset";
+import displayFont from "../../node_modules/@fontsource-variable/geologica/files/geologica-cyrillic-wght-normal.woff2?url";
+
+interface Props { lang: string; title: string; description: string; canonical?: string; }
+const { lang, title, description, canonical } = Astro.props;
+---
+<!doctype html>
+<html lang={lang} data-rec="SE-R005">
+  <head data-rec="SE-R001,SP-R004,SP-R005">
+    <meta charset="utf-8" />
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="uk_UA" />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href={asset("img/favicon.png")} type="image/png" />
+    <link rel="preload" href={displayFont} as="font" type="font/woff2" crossorigin />
+    <slot name="head" />
+    <style is:global>
+      html, body { overflow-x: clip; }
+    </style>
+  </head>
+  <body id="top">
+    <a class="skip-link" href="#main">{lang.startsWith("uk") ? "До змісту" : lang.startsWith("ru") ? "К содержанию" : "Skip to content"}</a>
+    <slot name="header" />
+    <main id="main"><slot /></main>
+    <slot name="footer" />
+    <script src="../scripts/reveal.ts"></script>
+    <script src="../scripts/main.ts"></script>
+  </body>
+</html>

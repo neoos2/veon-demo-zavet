@@ -1,0 +1,25 @@
+---
+// Client product photo: WebP srcset from public/img (scripts/images.mjs), width/height always set (UX-R010, SP-R002).
+import { img, type ImgKey } from "../data/site";
+import { asset } from "../lib/asset";
+interface Props { k: ImgKey; alt: string; h: number; sizes?: string; priority?: boolean; class?: string; rec?: string; }
+const { k, alt, h, sizes, priority = false, class: cls, rec } = Astro.props;
+const meta = img[k];
+const w = Math.round(h * meta.ratio);
+const srcset = meta.widths.map((x) => `${asset(`img/${k}-${x}.webp`)} ${x}w`).join(", ");
+const fallback = meta.widths.find((x) => x >= w * 2) ?? meta.widths[meta.widths.length - 1];
+---
+<img
+  class:list={["photo", cls]}
+  src={asset(`img/${k}-${fallback}.webp`)}
+  srcset={srcset}
+  sizes={sizes ?? `${w}px`}
+  width={w}
+  height={h}
+  alt={alt}
+  loading={priority ? "eager" : "lazy"}
+  fetchpriority={priority ? "high" : undefined}
+  decoding={priority ? "sync" : "async"}
+  data-rec={rec}
+  style={`--w:${w};--h:${h}`}
+/>

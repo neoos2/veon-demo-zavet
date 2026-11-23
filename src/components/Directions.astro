@@ -1,0 +1,34 @@
+---
+import Section from "./Section.astro";
+import FutureLink from "./FutureLink.astro";
+import Photo from "./Photo.astro";
+import { directions } from "../data/site";
+---
+<Section id="directions" class="directions" rec="UX-R003,UX-R010">
+  <div class="container directions__grid">
+    <div class="directions__index">
+      <h2 class="section-title">Напрями каталогу</h2>
+      <ol class="dir-list" data-dir-list>
+        {directions.map((d, i) => (
+          <li class="dir-list__item">
+            <FutureLink class="dir" data-dir={i}>
+              <span class="dir__thumb" aria-hidden="true">
+                {d.key && <Photo k={d.key} alt={d.alt ?? d.name} h={64} sizes="64px" class="dir__thumb-img" />}
+              </span>
+              <h3 class="dir__name">{d.name}</h3>
+            </FutureLink>
+          </li>
+        ))}
+      </ol>
+    </div>
+    <div class="scene" aria-hidden="true" data-scene>
+      {directions.map((d, i) => (
+        <figure class:list={["scene__frame", { "is-active": i === 0 }]} data-frame={i}>
+          {d.key
+            ? <Photo k={d.key} alt={d.alt ?? d.name} h={480} sizes="(min-width: 1024px) 560px, 0px" class="scene__img" />
+            : <span class="scene__word">{d.name}</span>}
+        </figure>
+      ))}
+    </div>
+  </div>
+</Section>

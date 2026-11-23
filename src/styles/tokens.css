@@ -1,0 +1,76 @@
+/* Hallmark · theme: custom · idea: "Лінійка виробника: вироби стоять на одній підлозі під заводськими кодами" · vibe: "точний, заводський, світлий, впевнений" · paper #FFFFFF · accent #BD2121 / #FF1929 · faces Geologica + IBM Plex Sans · hero: H1 і контакти зверху, ряд виробів на графітовій лінії з кодами 120 px · posture light/geometric-sans/chromatic-red */
+/* Hallmark · pre-emit critique: P4 H5 E4 S5 R4 V4 · weakest: E, many FutureLink items in the demo; they share one quiet dashed state so the page does not read as broken */
+/* Hallmark · waive 7b · surface: absolute, text 16.4:1 and white on #BD2121 6.17:1 pass gates 40 and 41 · the client photos are cut-outs shot on pure white, so the approved paper is #FFFFFF and a tint would leave grey boxes round every product */
+/* Hallmark · waive 44c · custom run; H1 and actions on top, the product line-up stands on a full-width floor below them · approved concept hero: the line of products under their codes is the visual, so it spans the page instead of standing beside the text */
+/* Hallmark · dismissed 28a · the footer logo is the last image of the page; the LCP image is the hero СМ-3 photo with fetchpriority=high */
+/* Hallmark · dismissed 49 · «Уточнити наявність і ціну» is a .btn, which sets white-space: nowrap */
+/* Hallmark · dismissed 25 · .route-panel__text is a one-sentence statement per department set at display size; 28ch keeps it to three lines */
+/* Client design tokens: only from design/concept.md (veon-concept colors + "Дизайн-система для FULL"). One system: no second token file. */
+:root {
+  /* colour roles */
+  --color-bg: #FFFFFF;
+  --color-text: #1D2023;
+  --color-muted: #5B6368;
+  --color-steel: #E8EBEC;
+  --color-line: #C9CFD2;
+  --color-on-dark-muted: #A9B1B5;
+  --color-primary: #BD2121;
+  --color-primary-hover: #9B1A1A;
+  --color-brand: #FF1929;
+  --color-on-primary: #FFFFFF;
+  --color-accent: #BD2121;
+  --color-focus: #1D2023;
+  --color-focus-on-dark: #FFFFFF;
+
+  /* type */
+  --font-display: "Geologica Variable", "Geologica", system-ui, sans-serif;
+  --font-body: "IBM Plex Sans", system-ui, sans-serif;
+  --text-caption: 0.875rem;   /* 14 */
+  --text-nav: 0.9375rem;      /* 15 */
+  --text-body: 1.0625rem;     /* 17 */
+  --text-lede: 1.375rem;      /* 22 */
+  --text-title: 2rem;         /* 32 */
+  --text-index: 2.5rem;       /* 40, directions index */
+  --text-section: 3rem;       /* 48 */
+  --text-hero: 4.75rem;       /* 76 */
+  --text-code: 7.5rem;        /* 120 */
+
+  /* spacing (rhythm of 8) */
+  --space-0: 0;
+  --space-1: 0.25rem;  /* 4 */
+  --space-2: 0.5rem;   /* 8 */
+  --space-3: 1rem;     /* 16 */
+  --space-4: 1.5rem;   /* 24 */
+  --space-5: 2rem;     /* 32 */
+  --space-6: 3rem;     /* 48 */
+  --space-7: 4rem;     /* 64 */
+  --space-8: 6rem;     /* 96 */
+  --space-9: 9rem;     /* 144 */
+  --space: var(--space-5);
+  --gutter: var(--space-4);
+  --section-gap: var(--space-9);
+
+  /* layout */
+  --container: 1320px;
+  --header-h: 72px;
+  --floor-line: 2px;
+  --hairline: 1px;
+  --radius: 4px;
+  --control-h: 52px;
+
+  /* motion */
+  --ease-out: cubic-bezier(.2, .7, .2, 1);
+  --dur: 600ms;
+  --dur-fast: 200ms;
+  --dur-tab: 220ms;
+  --dur-scene: 250ms;
+  --dur-route: 900ms;
+  --dur-word: 400ms;
+}
+
+@media (max-width: 1023px) {
+  :root { --space: var(--space-4); --header-h: 64px; }
+}
+@media (max-width: 767px) {
+  :root { --space: 1.25rem; --section-gap: 5rem; --control-h: 56px; --text-section: 2.25rem; --text-title: 1.75rem; --text-lede: 1.1875rem; }
+}

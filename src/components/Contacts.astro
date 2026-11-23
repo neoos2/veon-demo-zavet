@@ -1,0 +1,40 @@
+---
+import Section from "./Section.astro";
+import Icon from "./Icon.astro";
+import { contacts, maps } from "../data/site";
+---
+<Section id="contacts" class="contacts" rec="UX-R006">
+  <div class="container contacts__grid">
+    <div class="contacts__main">
+      <h2 class="section-title">Контакти і доставка</h2>
+      <dl class="phones">
+        <div class="phones__row">
+          <dt class="phones__dept">Відділ продажу</dt>
+          <dd><a class="phones__num tnum" href={`tel:${contacts.sales.tel}`}>{contacts.sales.label}</a></dd>
+        </div>
+        <div class="phones__row">
+          <dt class="phones__dept">Відділ сервісу</dt>
+          <dd><a class="phones__num tnum" href={`tel:${contacts.service[0].tel}`}>{contacts.service[0].label}</a></dd>
+        </div>
+      </dl>
+      <ul class="channels">
+        <li><a class="channel" href={contacts.telegram}><Icon name="telegram" />Telegram</a></li>
+        <li><a class="channel" href={contacts.viber}><Icon name="viber" />Viber</a></li>
+        <li><a class="channel" href={`mailto:${contacts.email}`}><Icon name="mail" />{contacts.email}</a></li>
+      </ul>
+    </div>
+    <div class="contacts__places">
+      <div class="place">
+        <h3 class="place__title">Офіс</h3>
+        <p class="place__addr">{contacts.office}</p>
+        <a class="place__map" href={maps.office}><Icon name="pin" />Офіс на карті</a>
+      </div>
+      <div class="place">
+        <h3 class="place__title">Склад</h3>
+        <p class="place__addr">{contacts.warehouse}</p>
+        <a class="place__map" href={maps.warehouse}><Icon name="pin" />Склад на карті</a>
+      </div>
+      <p class="contacts__delivery">Доставка по всій Україні, експорт у країни ЄС.</p>
+    </div>
+  </div>
+</Section>

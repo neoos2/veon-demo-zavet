@@ -1,0 +1,56 @@
+---
+import Base from "../layouts/Base.astro";
+import Header from "../components/Header.astro";
+import Hero from "../components/Hero.astro";
+import Directions from "../components/Directions.astro";
+import Models from "../components/Models.astro";
+import Production from "../components/Production.astro";
+import Routes from "../components/Routes.astro";
+import Contacts from "../components/Contacts.astro";
+import Footer from "../components/Footer.astro";
+import BottomBar from "../components/BottomBar.astro";
+import { contacts, socials } from "../data/site";
+
+const title = "Медтехніка Київ — виробник медичних меблів | Заповіт";
+const description = "Заповіт — київський виробник медичних меблів і обладнання 25+ років: столики СМ-3, кушетки, стерилізатори ГП, опромінювачі. Доставка по Україні, експорт.";
+const ld = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "#organization",
+      name: "Заповіт",
+      alternateName: "Завет",
+      legalName: "Група Компаній ЗАПОВІТ",
+      description: "Виробник медичних меблів і обладнання в Києві, власне виробництво 25+ років.",
+      email: contacts.email,
+      telephone: contacts.sales.tel,
+      areaServed: ["UA", "EU"],
+      address: [
+        { "@type": "PostalAddress", streetAddress: "вул. Стеценка, 30 (лінія 4), 3-й поверх", addressLocality: "Київ", addressCountry: "UA" },
+        { "@type": "PostalAddress", streetAddress: "вул. Віктора Некрасова (Північно-Сирецька), 3", addressLocality: "Київ", addressCountry: "UA" },
+      ],
+      contactPoint: [
+        { "@type": "ContactPoint", contactType: "sales", telephone: contacts.sales.tel, email: contacts.email, availableLanguage: ["uk"] },
+        { "@type": "ContactPoint", contactType: "customer service", name: "Відділ сервісу", telephone: contacts.service[0].tel },
+        { "@type": "ContactPoint", contactType: "sales", name: "Тендерний відділ", telephone: contacts.tender.phone.tel, email: contacts.tender.email },
+        { "@type": "ContactPoint", contactType: "sales", name: "Відділ експорту (ЗЕД)", telephone: contacts.exportDept.phone.tel, email: contacts.exportDept.email },
+      ],
+      sameAs: socials.map((s) => s.href),
+    },
+    { "@type": "WebSite", "@id": "#website", name: "Заповіт", inLanguage: "uk", publisher: { "@id": "#organization" } },
+  ],
+};
+---
+<Base lang="uk" title={title} description={description}>
+  <script is:inline slot="head" type="application/ld+json" data-rec="SE-R004" set:html={JSON.stringify(ld)} />
+  <Header slot="header" />
+  <Hero />
+  <Directions />
+  <Models />
+  <Production />
+  <Routes />
+  <Contacts />
+  <Footer slot="footer" />
+  <BottomBar slot="footer" />
+</Base>

@@ -1,0 +1,56 @@
+---
+import FutureLink from "./FutureLink.astro";
+import Icon from "./Icon.astro";
+import { contacts } from "../data/site";
+import { asset } from "../lib/asset";
+const nav = [
+  { label: "Моделі", href: "#models" },
+  { label: "Виробництво", href: "#production" },
+  { label: "Закладам і тендерам", href: "#routes-tender" },
+  { label: "Сервіс", href: "#routes-service" },
+  { label: "Контакти", href: "#contacts" },
+];
+---
+<header class="site-header" data-header data-rec="SP-R003">
+  <div class="container site-header__bar">
+    <a class="logo" href="#top" aria-label="Заповіт, на початок сторінки">
+      <picture>
+        <source srcset={asset("img/logo-zapovit.webp")} type="image/webp" />
+        <img src={asset("img/logo-zapovit.png")} width="164" height="36" alt="Заповіт — Завет, лідер галузі" />
+      </picture>
+    </a>
+
+    <nav class="nav" aria-label="Головне меню" data-rec="UX-R008" id="site-nav" data-nav>
+      <ul class="nav__list">
+        <li><FutureLink class="nav__link">Каталог</FutureLink></li>
+        {nav.map((n) => <li><a class="nav__link" href={n.href}>{n.label}</a></li>)}
+      </ul>
+      <div class="nav__extra">
+        <a class="nav__contact" href={`tel:${contacts.sales.tel}`}><Icon name="phone" />Відділ продажу {contacts.sales.label}</a>
+        <a class="nav__contact" href={contacts.telegram}><Icon name="telegram" />Telegram</a>
+        <ul class="lang lang--panel" aria-label="Мова сайту">
+          <li><span class="lang__item lang__item--current" aria-current="true" lang="uk">UA</span></li>
+          <li><FutureLink class="lang__item"><span lang="ru">RU</span></FutureLink></li>
+          <li><FutureLink class="lang__item"><span lang="en">EN</span></FutureLink></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone" href={`tel:${contacts.sales.tel}`} aria-label={`Зателефонувати у відділ продажу ${contacts.sales.label}`}>
+        <Icon name="phone" /><span class="header-phone__num">{contacts.sales.label}</span><span class="header-phone__word">Зателефонувати</span>
+      </a>
+      <a class="header-tg" href={contacts.telegram}><Icon name="telegram" /><span>Telegram</span></a>
+      <ul class="lang lang--bar" aria-label="Мова сайту" data-rec="UX-R001">
+        <li><span class="lang__item lang__item--current" aria-current="true" lang="uk">UA</span></li>
+        <li><FutureLink class="lang__item"><span lang="ru">RU</span></FutureLink></li>
+        <li><FutureLink class="lang__item"><span lang="en">EN</span></FutureLink></li>
+      </ul>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="site-nav" data-burger>
+        <span class="burger__open"><Icon name="menu" size={24} /></span>
+        <span class="burger__close"><Icon name="close" size={24} /></span>
+        <span class="visually-hidden">Меню</span>
+      </button>
+    </div>
+  </div>
+</header>

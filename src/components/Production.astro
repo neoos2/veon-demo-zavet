@@ -1,0 +1,25 @@
+---
+import Section from "./Section.astro";
+import { operations, proofs } from "../data/site";
+---
+<Section id="production" class="production" rec="SE-R003,SM-R011">
+  <div class="container production__grid">
+    <div class="production__intro">
+      <h2 class="section-title">Власне виробництво в&nbsp;Києві</h2>
+      <p class="production__lede">Метал проходить увесь шлях у нашому цеху, тому технічні параметри виробу можна змінити під ваш заклад.</p>
+    </div>
+    <dl class="proofs">
+      {proofs.map((p) => (
+        <div class="proofs__row">
+          <dt class="proofs__figure tnum">{p.figure}</dt>
+          <dd class="proofs__text">{p.text}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+  <div class="container">
+    <ol class="route" aria-label="Операції у власному цеху" data-route>
+      {operations.map((o, i) => <li class="route__step" style={`--i:${i}`}>{o}</li>)}
+    </ol>
+  </div>
+</Section>
